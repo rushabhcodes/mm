@@ -9,6 +9,12 @@ const unitToMm: { [key: string]: number } = {
   feet: 304.8,
 }
 
+const mmNumberFormatter = new Intl.NumberFormat("en-US", {
+  useGrouping: false,
+  notation: "standard",
+  maximumFractionDigits: 12,
+})
+
 export const mm = (n: number | string): number => {
   let unit =
     typeof n === "number" ? "mm" : n.replace(/^[^a-zA-Z]+/g, "").toLowerCase()
@@ -22,7 +28,7 @@ export const mm = (n: number | string): number => {
 }
 
 export const mmStr = (n: number | string): string => {
-  return `${mm(n)}mm`
+  return `${mmNumberFormatter.format(mm(n))}mm`
 }
 
 export const mil2mm = (mil: number | string) => {
